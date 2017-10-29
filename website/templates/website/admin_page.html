@@ -1,0 +1,44 @@
+{% extends 'website/base.html' %}
+{% block content %}
+
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+
+
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">Change About Section</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>
+
+
+      <form method="POST">{% csrf_token %}
+        {{ form.nonfield_errors }}
+        <div class="fieldWrapper">
+          {{ form.title.errors }}
+          <label for="{{ form.title.id_for_label }}"></label> <input class = "w3-input w3-padding-16" value="{{ form.title.value }}" type="text" name="title" placeholder="Titel" required id="id_title" maxlength="200" required/>
+        </div>
+
+        <p>
+          <div class="fieldWrapper">
+            {{ form.text.errors }}
+            <label for="{{ form.text.id_for_label }}"></label>
+              <textarea class = "w3-input w3-padding-16" type="text" name="text" placeholder="Text" required id="id_text" rows="10" cols="40" required />
+              {{ form.text.value }}
+              </textarea>
+          </div>
+        <p>
+
+
+
+          <button class="button w3-text-light-grey" type="submit">
+            <i class="fa fa-paper-plane"></i> Save
+          </button>
+
+      </form>
+    </div>
+    </p>
+
+{% endblock %}
+    <!-- Footer -->

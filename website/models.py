@@ -8,13 +8,9 @@ from django.utils import timezone
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
-    display_title = models.CharField(max_length=200, default='SOME STRING')
-    title = models.CharField(max_length=200)
-    text = models.TextField()
-    location = models.CharField(max_length=200)
-    phone = models.CharField(max_length=200)
-    mail = models.EmailField(max_length=254)
-    image = models.ImageField(upload_to='img', height_field=None, width_field=None, default='SOME STRING')
+    title = models.CharField('Title', max_length=200)
+    text = models.TextField('Description')
+    image = models.ImageField(upload_to='img', height_field=None, width_field=None)
     number = models.IntegerField(default=0)
     created_date = models.DateTimeField(
             default=timezone.now)

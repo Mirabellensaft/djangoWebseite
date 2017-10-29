@@ -1,0 +1,39 @@
+{% extends 'website/base.html' %}
+{% block content %}
+
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+
+
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    {% if user.is_authenticated %}
+    <h2 class="w3-text-light-grey">{{ work.title }}
+      <a href="{% url 'display_edit' pk=work.pk %}" class="w3-text-light-grey">
+        <button class="button">
+        <i class="fa fa-pencil w3-text-light-grey"></i>
+        </button></a>
+      <a href="" class="w3-text-light-grey">
+        <button class="button">
+        <i class="fa fa-remove w3-text-light-grey"></i>
+        </button></a>
+    </h2>
+    {% else %}
+    <h2 class="w3-text-light-grey">{{ work.title }}</h2>
+    {% endif %}
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+        <p><img src="/{{ work.image.url }}" style="width:100%"></a></p>
+
+      </div>
+      <div class="w3-half">
+        <p>{{ work.text|linebreaksbr }}</p>
+      </div>
+    </div>
+
+
+{% endblock %}
+    <!-- Footer -->
