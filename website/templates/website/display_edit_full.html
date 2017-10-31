@@ -1,0 +1,48 @@
+{% extends 'website/base.html' %}
+{% block content %}
+
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+
+
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">New piece of work</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>
+
+
+      <form enctype="multipart/form-data" method="POST" action: "/inc/">{% csrf_token %}
+        {{ form.nonfield_errors }}
+        <div class="fieldWrapper">
+          {{ form.title.errors }}
+          <label for="{{ form.title.id_for_label }}"></label> <input class = "w3-input w3-padding-16" value="{{ form.title.value }}" type="text" name="title" placeholder=" " required id="id_title" maxlength="200" required/>
+        </div>
+        <p>
+        <div class="fieldWrapper">
+          {{ form.text.errors }}
+          <label for="{{ form.text.id_for_label }}"></label>
+            <textarea class = "w3-input w3-padding-16" type="text" name="text" placeholder="Text" required id="id_text" rows="10" cols="40" required />
+            {{ form.text.value }}
+            </textarea>
+        </div>
+        <p>
+        <div class="fieldWrapper">
+          {{ form.image.errors }}
+          <label for="file"></label>Currently: <a href="{{ form.image.url }}">{{ form.image.value }}</a><br />
+          Change:
+          <input class = "w3-button w3-hover-black" type="file" name="image" id="file"/>
+        </div>
+
+
+          <button class="button w3-text-light-grey" type="submit">
+            <i class="fa fa-paper-plane"></i> Save
+          </button>
+
+      </form>
+    </div>
+    </p>
+
+{% endblock %}
+    <!-- Footer -->

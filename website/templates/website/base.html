@@ -13,7 +13,33 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 /* Set the width of the sidebar to 120px */
 .w3-sidebar {width: 120px;background: #222;}
 /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-.button {background-color: #222222; font-size: 24px; border: none; padding: 1px 15px; cursor: pointer; } /* Blac */
+.button {
+  background-color: #222222;
+  font-size: 24px;
+  border: none;
+  padding: 1px 15px;
+  cursor: pointer;
+  } /* Blac */
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  }
+
+.inputfile + label {
+  background-color: #222222;
+  font-size: 24px;
+  border: none;
+  padding: 1px 15px;
+  cursor: pointer;
+  }
+
+
+
 #main {margin-left: 120px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
@@ -43,7 +69,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       </a>
       <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
         <i class="fa fa-lock w3-xxlarge"></i>
-        <p>+</p>
+        <p>LOGIN</p>
       </a>
     </nav>
 
