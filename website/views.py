@@ -7,24 +7,26 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from .models import *
-from .forms import DisplayPost, ContactForm, EditContact
+from .models import Post as Post_model
+from .models import Admin as Admin_model
+from .forms import DisplayPost, ContactForm, Admin
+from .helperfunctions import randomnumber
 
 
 # Create your views here.
 
 def post(request):
-
-    about = Post.objects.get(title__contains='About')
-    works = Post.objects.filter(title__contains=' ')#.order_by('published_date')
-    return render(request, 'website/post_list.html', {'about': about, 'works': works})
+    admin = Admin_model.objects.get(title='Admin')
+    works = Post_model.objects.filter(title__contains=' ')#.order_by('published_date')
+    return render(request, 'website/post_list.html', {'admin': admin, 'works': works})
+    # return render(request, 'website/post_list.html', {'works': works})
 
 @login_required
 def admin_page(request, pk):
 
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post_model.objects, pk=pk)
     if request.method == "POST":
-        form = DisplayPost(request.POST, instance=post)
+        form = Admin_model(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -32,14 +34,14 @@ def admin_page(request, pk):
             post.save()
             return redirect('post_list')
     else:
-        form = DisplayPost(instance=post)
-    print form.as_p()
+        form = Admin_model(instance=post)
+    print (form.as_p())
     return render(request, 'website/admin_page.html', {'form': form})
 
 
 def work_detail(request, pk):
 
-    work = get_object_or_404(Post, pk=pk)
+    work = get_object_or_404(Post_model, pk=pk)
     return render(request, 'website/work_detail.html', {'work': work})
 
 @login_required
@@ -51,30 +53,31 @@ def displayPost_new(request):
             post = form.save(commit= False)
             post.author = request.user
             post.published_date = timezone.now()
+            post.number = randomnumber()
             post = Post(image = request.FILES['image'])
             post.save()
             return redirect('post_list')
     else:
         form = DisplayPost()
-    print form.as_p()
+    print (form.as_p())
     return render(request, 'website/display_edit.html', {'form': form})
 
 @login_required
 def display_edit(request, pk):
 
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post_model, pk=pk)
     if request.method == "POST":
         form = DisplayPost(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
-            post = Post(image = request.FILES['image'])
+            post = Post_model(image = request.FILES['image'])
             post.save()
             return redirect('work_detail', pk=post.pk)
     else:
         form = DisplayPost(instance=post)
-    print form.as_p()
+    print (form.as_p())
     return render(request, 'website/display_edit.html', {'form': form})
 
 

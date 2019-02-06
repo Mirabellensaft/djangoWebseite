@@ -17,7 +17,8 @@
         {{ form.nonfield_errors }}
         <div class="fieldWrapper">
           {{ form.title.errors }}
-          <label for="{{ form.title.id_for_label }}"></label> <input class = "w3-input w3-padding-16" value="{{ form.title.value }}" type="text" name="title" placeholder=" " required id="id_title" maxlength="200" required/>
+          <label for="{{ form.title.id_for_label }}"></label>
+          <input class = "w3-input w3-padding-16" value="{{ form.title.value }}" type="text" name="title" placeholder=" " required id="id_title" maxlength="200" required/>
         </div>
         <p>
         <div class="fieldWrapper">
@@ -36,7 +37,7 @@
         </div>
 
 
-          <button class="button w3-text-light-grey" type="submit">
+          <button class="button-normal w3-text-light-grey" type="submit">
             <i class="fa fa-paper-plane"></i> Save
           </button>
 
